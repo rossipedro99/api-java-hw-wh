@@ -1,6 +1,7 @@
 package com.hwwh.model;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -51,6 +54,11 @@ public class UserSystemModel implements Serializable{
 	private String ramID;
 	@Column(nullable = false)
 	private String gpuID;
+	@CreationTimestamp
+	@Column(nullable = false)
+	private Date dataCriacao;
+	@Column(nullable = false)
+	private String identificador;
 	
 	public UserSystemModel(UsuarioModel idUsuario, String sistemaOperacional, String processador, String placaDeVideo,
 			String placaMae, String hd, String memoriaRam, String cpuID, String baseBoardID, String hdID, String ramID,
@@ -67,6 +75,7 @@ public class UserSystemModel implements Serializable{
 		this.hdID = hdID;
 		this.ramID = ramID;
 		this.gpuID = gpuID;
+		this.identificador = java.util.UUID.randomUUID().toString();
 	}
 
 	public UsuarioModel getIdUsuario() {
@@ -167,6 +176,14 @@ public class UserSystemModel implements Serializable{
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public Date getDataCriacao() {
+		return dataCriacao;
+	}
+
+	public String getIdentificador() {
+		return identificador;
 	}
 
 
